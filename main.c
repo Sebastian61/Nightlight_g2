@@ -9,5 +9,6 @@
 #include <xc.h>
 
 void main(void) {
+    uint8_t test;
     return;
 }
