@@ -7,8 +7,26 @@
 
 
 #include <xc.h>
+#include "main.h"
+
+nightlight_t nightlight;
+
+void system_init(void);
+
+void __interrupt() myisr(void) {
+    
+}
 
 void main(void) {
-    uint8_t test;
-    return;
+    system_init();
+    while(1) {
+        
+    }
+}
+
+void system_init(void) {
+    //OSC initialize
+    //IO initialize
+    //ADC initialize
+    //Interrupt initialize
 }

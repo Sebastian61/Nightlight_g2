@@ -33,6 +33,17 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
+typedef enum {
+    ON,
+    DIMMING,
+    OFF
+}nlStatus_t;
+
+typedef struct {
+    uint8_t brightness;
+    nlStatus_t status;
+}nightlight_t;
+
 // TODO Insert appropriate #include <>
 
 // TODO Insert C++ class definitions if appropriate
