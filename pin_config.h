@@ -28,51 +28,15 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef _MAIN_H_
-#define	_MAIN_H_
+#ifndef _PIN_CONFIG_H_
+#define	_PIN_CONFIG_H_
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
-typedef enum {
-    ON,
-    DIMMING,
-    OFF
-}nlStatus_t;
-
-typedef struct {
-    uint8_t brightness;
-    nlStatus_t status;
-}nightlight_t;
-
-// TODO Insert appropriate #include <>
-
-// TODO Insert C++ class definitions if appropriate
-
-// TODO Insert declarations
-
-// Comment a function and leverage automatic documentation with slash star star
-/**
-    <p><b>Function prototype:</b></p>
-  
-    <p><b>Summary:</b></p>
-
-    <p><b>Description:</b></p>
-
-    <p><b>Precondition:</b></p>
-
-    <p><b>Parameters:</b></p>
-
-    <p><b>Returns:</b></p>
-
-    <p><b>Example:</b></p>
-    <code>
- 
-    </code>
-
-    <p><b>Remarks:</b></p>
- */
-// TODO Insert declarations or function prototypes (right here) to leverage 
-// live documentation
+#define BUTTON_MASK        _PORTA_RA3_MASK
+#define OUTPUT_MASK        _PORTA_RA0_MASK
+#define LIGHT_SENSOR_MASK  _PORTA_RA1_MASK
+#define AN_INPUT_MASK      _PORTA_RA2_MASK
 
 #ifdef	__cplusplus
 extern "C" {
@@ -85,5 +49,5 @@ extern "C" {
 }
 #endif /* __cplusplus */
 
-#endif	/* _MAIN_H_ */
+#endif	/* _PIN_CONFIG_H_ */
 
