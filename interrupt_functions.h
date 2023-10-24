@@ -28,22 +28,20 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef _PERIPHERAL_FEATURES_H_
-#define	_PERIPHERAL_FEATURES_H_
+#ifndef _INTERRUPT_FUNCTIONS_H_
+#define	_INTERRUPT_FUNCTIONS_H_
 
 #include <xc.h> // include processor files - each processor file is guarded.  
+#include "peripheral_features.h"
 
-#define ADC_CHANNELS            2
+typedef struct {
+    uint8_t result[ADC_CHANNELS];
+    adc_channel_t channel_number;
+}adc_inst;
 
-const uint8_t adc_channels[2] = {1, 2};
+void handle_ADC_interrupt(adc_inst *adc);
 
-typedef enum{
-    LIGHT_SENSOR_INDEX = 0,
-    BRIGHTNESS_INDEX,
-    TOTAL_CHANNELS
-}adc_channel_t;
-
-void ADC_set_channel(uint8_t channel);
+void handle_timer_0_interrupt(void);
 
 #ifdef	__cplusplus
 extern "C" {
@@ -56,5 +54,5 @@ extern "C" {
 }
 #endif /* __cplusplus */
 
-#endif	/* _PERIPHERAL_FEATURES_H_ */
+#endif	/* _INTERRUPT_FUNCTIONS_H_ */
 

@@ -27,14 +27,26 @@
 #include <xc.h>
 #include "pin_config.h"
 #include "main.h"
+#include "interrupt_functions.h"
 
 nightlight_t nightlight;
+adc_inst sensor_adc;
 
 void system_init(void);
 
 void __interrupt() myisr(void) {
     //check power button press
-    //check ADC result
+    /*** check ADC result ***/
+    if(PIR1bits.ADIF == 1) {
+        PIR1bits.ADIF = 0;
+        handle_ADC_interrupt(&sensor_adc);
+    }
+    
+    /*** check Timer 0 interrupt ***/
+    if(INTCONbits.TMR0IF == 1) {
+        INTCONbits.TMR0IF = 0;
+        handle_timer_0_interrupt();
+    }
     //systick
       //update nightlight brightness
 }
@@ -63,6 +75,7 @@ void system_init(void) {
     /*** ADC initialize ***/
     ANSELA |= (AN_INPUT_MASK | LIGHT_SENSOR_MASK); //set adc pins
     ANSELA &= ~(BUTTON_MASK); //disable adc on other pins
+    WPUA &= ~(AN_INPUT_MASK | LIGHT_SENSOR_MASK); //disable week pull-up resistors on ADC pins
     ADCONbits.ADCS = 0b101; //set conversion clock bits Fosc/16
     PIR1bits.ADIF = 0; //clear adc interrupt flag
     PIE1bits.ADIE = 1; //enable adc interrupt
@@ -76,6 +89,7 @@ void system_init(void) {
     INTCONbits.TMR0IE = 1; //enable timer 0 interrupt
     
     /*** Interrupt initialize ***/
+    INTCONbits.PEIE = 1; //enable peripheral interrupts
     
     //nightlight initialize
 }
